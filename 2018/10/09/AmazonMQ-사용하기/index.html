@@ -5,15 +5,20 @@
   
 
   
-  <title>programmer jeonghunKim8</title>
+  <title>AmazonMQ 사용하기 | programmer jeonghunKim8</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="programmer jeonghunKim8">
-<meta property="og:url" content="https://jeonghunkim8.github.io/index.html">
+  <meta name="description" content="Message broker요즘 회사에서 새로운 시스템이 개발될 때, 레거시 시스템과의 연동이 많아지면서 Message broker 도입의 필요성에 대해 이야기 하고 있습니다. (조금 늦었지만..) 메세지 브로커 선택 시 어떤 브로커를 선택 하느냐 또한 중요한데요, 하자면 저희 회사에서는 Amazon MQ를 선택하게 되었습니다. Amazon MQ는 지난 20">
+<meta name="keywords" content="Java,Spring,AmazonMQ,ActiveMQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AmazonMQ 사용하기">
+<meta property="og:url" content="https://jeonghunkim8.github.io/2018/10/09/AmazonMQ-사용하기/index.html">
 <meta property="og:site_name" content="programmer jeonghunKim8">
+<meta property="og:description" content="Message broker요즘 회사에서 새로운 시스템이 개발될 때, 레거시 시스템과의 연동이 많아지면서 Message broker 도입의 필요성에 대해 이야기 하고 있습니다. (조금 늦었지만..) 메세지 브로커 선택 시 어떤 브로커를 선택 하느냐 또한 중요한데요, 하자면 저희 회사에서는 Amazon MQ를 선택하게 되었습니다. Amazon MQ는 지난 20">
 <meta property="og:locale" content="Korean">
+<meta property="og:updated_time" content="2019-01-07T14:50:50.296Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="programmer jeonghunKim8">
+<meta name="twitter:title" content="AmazonMQ 사용하기">
+<meta name="twitter:description" content="Message broker요즘 회사에서 새로운 시스템이 개발될 때, 레거시 시스템과의 연동이 많아지면서 Message broker 도입의 필요성에 대해 이야기 하고 있습니다. (조금 늦었지만..) 메세지 브로커 선택 시 어떤 브로커를 선택 하느냐 또한 중요한데요, 하자면 저희 회사에서는 Amazon MQ를 선택하게 되었습니다. Amazon MQ는 지난 20">
   
     <link rel="alternate" href="/atom.xml" title="programmer jeonghunKim8" type="application/atom+xml">
   
@@ -60,66 +65,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-vue-typescript-1" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/26/vue-typescript-1/" class="article-date">
-  <time datetime="2018-10-26T11:00:00.000Z" itemprop="datePublished">2018-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/26/vue-typescript-1/">VueJS 에서 Typescript로 개발하기</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="VueJS-with-TypeScript"><a href="#VueJS-with-TypeScript" class="headerlink" title="VueJS with TypeScript"></a>VueJS with TypeScript</h1><h2 id="사전-준비"><a href="#사전-준비" class="headerlink" title="사전 준비"></a>사전 준비</h2><p>Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다.</p>
-<p>pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다.</p>
-<p>vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다.</p>
-<p>기존에는 프로젝트 생성 후 수동으로 Typescript에 맞게 꾸며야만 했으나, vue cli 3 버전부터는 프로젝트 생성 시 옵션을 통하여 Typescript를 선택할 수 있어 많이 편해졌습니다.</p>
-<p>터미널 (또는 CMD)창을 열어 아래 명령어를 입력하여 vue-cli를 설치 해 줍니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli</span><br></pre></td></tr></table></figure>
-<p>이제 간단히 vue cli 설치가 끝났습니다.</p>
-<p>npm을 대신할 패키지 매니저 yarn도 설치 해줍니다.<br>(npm을 사용하실 분들은 설치하지 않으셔도 됩니다.)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g yarn</span><br></pre></td></tr></table></figure>
-<p>이제 콘솔에서 <code>vue</code> 명령어를 통해 vue cli를 호출할 수 있습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue --version</span><br></pre></td></tr></table></figure></p>
-<p>글 작성 시점의 최신 버전은 3.2.1이네요.</p>
-<h2 id="vue-cli를-통해-프로젝트-생성"><a href="#vue-cli를-통해-프로젝트-생성" class="headerlink" title="vue cli를 통해 프로젝트 생성"></a>vue cli를 통해 프로젝트 생성</h2><p>vue-cli를 통해 프로젝트를 생성하는것은 아주 쉽습니다.</p>
-<p>터미널을 열고</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue ui</span><br></pre></td></tr></table></figure>
-<p>를 입력하여 브라우저를 통한 gui화면을 통해 뷰 프로젝트를 생성하고 관리할 수도 있습니다.</p>
-<p>그러나, 터미널이 더 편한 개발자들도 많을 것 같습니다.<br>(속도도 더 빠르구요..)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create test-typescript-project</span><br></pre></td></tr></table></figure>
-<p>터미널에서 위 명령어를 입력합니다.</p>
-<p><img src="1.png" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqmgqn4s0000uhzufzvgfw9l" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-AmazonMQ-사용하기" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-AmazonMQ-사용하기" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/09/AmazonMQ-사용하기/" class="article-date">
   <time datetime="2018-10-09T06:00:00.000Z" itemprop="datePublished">2018-10-09</time>
@@ -132,8 +78,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/09/AmazonMQ-사용하기/">AmazonMQ 사용하기</a>
+    <h1 class="article-title" itemprop="name">
+      AmazonMQ 사용하기
     </h1>
   
 
@@ -215,11 +161,23 @@
     </footer>
   </div>
   
-</article>
-
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/26/vue-typescript-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          VueJS 에서 Typescript로 개발하기
+        
+      </div>
+    </a>
+  
+  
+</nav>
 
   
-
+</article>
 
 </section>
         
