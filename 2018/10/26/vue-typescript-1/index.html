@@ -7,19 +7,20 @@
   
   <title>VueJS 에서 Typescript로 개발하기 | programmer jeonghunKim8</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="VueJS with TypeScript사전 준비Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다. vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다.">
+  <meta name="description" content="사전 준비Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다. vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다. 기존에는 프로젝트 생성 후 수동으로">
 <meta name="keywords" content="VueJS,TypeScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VueJS 에서 Typescript로 개발하기">
 <meta property="og:url" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/index.html">
 <meta property="og:site_name" content="programmer jeonghunKim8">
-<meta property="og:description" content="VueJS with TypeScript사전 준비Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다. vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다.">
+<meta property="og:description" content="사전 준비Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다. vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다. 기존에는 프로젝트 생성 후 수동으로">
 <meta property="og:locale" content="Korean">
 <meta property="og:image" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/1.png">
-<meta property="og:updated_time" content="2019-01-07T14:52:08.087Z">
+<meta property="og:image" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/2.png">
+<meta property="og:updated_time" content="2019-01-07T15:19:41.449Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VueJS 에서 Typescript로 개발하기">
-<meta name="twitter:description" content="VueJS with TypeScript사전 준비Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다. vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다.">
+<meta name="twitter:description" content="사전 준비Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다. vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다. 기존에는 프로젝트 생성 후 수동으로">
 <meta name="twitter:image" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/1.png">
   
     <link rel="alternate" href="/atom.xml" title="programmer jeonghunKim8" type="application/atom+xml">
@@ -89,7 +90,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="VueJS-with-TypeScript"><a href="#VueJS-with-TypeScript" class="headerlink" title="VueJS with TypeScript"></a>VueJS with TypeScript</h1><h2 id="사전-준비"><a href="#사전-준비" class="headerlink" title="사전 준비"></a>사전 준비</h2><p>Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다.</p>
+        <h2 id="사전-준비"><a href="#사전-준비" class="headerlink" title="사전 준비"></a>사전 준비</h2><p>Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다.</p>
 <p>pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다.</p>
 <p>vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다.</p>
 <p>기존에는 프로젝트 생성 후 수동으로 Typescript에 맞게 꾸며야만 했으나, vue cli 3 버전부터는 프로젝트 생성 시 옵션을 통하여 Typescript를 선택할 수 있어 많이 편해졌습니다.</p>
@@ -108,11 +109,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create test-typescript-project</span><br></pre></td></tr></table></figure>
 <p>터미널에서 위 명령어를 입력합니다.</p>
 <p><img src="1.png" alt=""></p>
+<p>default(babel, eslint) 와 Manually select features 를 선택할 수 있습니다. 우리는 typescript를 사용할 것이기 때문에 Manually select features를 선택합니다.</p>
+<p><img src="2.png" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqmgqn4s0000uhzufzvgfw9l" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqmh5r4u0000aozu1vrapwwh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
