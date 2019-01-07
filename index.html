@@ -102,14 +102,34 @@
 <p>그러나, 터미널이 더 편한 개발자들도 많을 것 같습니다.<br>(속도도 더 빠르구요..)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create test-typescript-project</span><br></pre></td></tr></table></figure>
 <p>터미널에서 위 명령어를 입력합니다.</p>
-<p><img src="1.png" alt=""></p>
+<img src="/2018/10/26/vue-typescript-1/1.png" title="사진1">
 <p>default(babel, eslint) 와 Manually select features 를 선택할 수 있습니다. 우리는 typescript를 사용할 것이기 때문에 Manually select features를 선택합니다.</p>
-<p><img src="2.png" alt=""></p>
+<p>선택한 후 프로젝트 구성에 맞는 옵션을 선택 합니다.</p>
+<img src="/2018/10/26/vue-typescript-1/2.png" title="사진2">
+<p>이번 샘플 프로젝트에서는 Babel, <strong>Typescript</strong>, Router, Vuex, CSS Pre-processors, Linter/Formatter만 선택하고 진행합니다.<br>(Unit Test나 E2E Testing은 제외합니다. 언제든 추후에 추가할 수 있습니다.)</p>
+<p>babel은 js를 컴파일 하기 위한 녀석이라고 보면 되고, 두번째, Typescript가 핵심입니다.</p>
+<p>Router는 라우팅 경로를 컨트롤하기 위한 vue 플러그인, Vuex는 상태관리를 위한 vue 플러그인이고,</p>
+<p>CSS Pre-processors는 SCSS를 사용하기 위함, Linter/Formatter는 문법 검사 하는 녀석이라고 생각하면 됩니다. <del>(더이상의 자세한 설명은 생략한다)</del></p>
+<p>옵션들을 선택하고 <code>Enter</code>를 누르면, 아래와 같은 질문을 만나게 됩니다.</p>
+<img src="/2018/10/26/vue-typescript-1/3.png" title="사진3">
+<p>아래 첨부한 그림과 같이 선택해 줍니다.</p>
+<img src="/2018/10/26/vue-typescript-1/4.png" title="사진4">
+<p>모두 선택 한 후 또다시 <code>Enter</code>!!!</p>
+<p>조금 기다린 후에, 아래와 같이 프로젝트가 완성 되었다는 메세지를 만날 수 있습니다.</p>
+<img src="/2018/10/26/vue-typescript-1/5.png" title="사진5">
+<p>터미널 하단에 성공적으로 프로젝트가 생성되었다는 메세지와 함께, 테스트 해볼 수 있는 명령어를 예시로 들어줍니다.</p>
+<p>터미널에 그대로 입력해 봅니다.<br>로컬 개발 서버가 구동됩니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd test-typescript-project</span><br><span class="line">yarn serve</span><br></pre></td></tr></table></figure>
+<img src="/2018/10/26/vue-typescript-1/6.png" title="사진6">
+<p>성공적으로 컴파일 되었다는 메세지와 함께<br>브라우저로 개발서버에 접속해 볼 수 있는 주소가 표시됩니다.</p>
+<img src="/2018/10/26/vue-typescript-1/7.png" title="사진7">
+<p>잘 작동되는것을 확인해 볼 수 있습니다.</p>
+<p>다음 포스트에서는 대략적인 폴더 구조와 컴포넌트 구성을 해보겠습니다.<br>감사합니다.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqmh5r4u0000aozu1vrapwwh" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqmi5c8d0000ypzus4drolm3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -207,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/09/AmazonMQ-사용하기/" data-id="cjqmh5r610005aozuo7t569j0" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/09/AmazonMQ-사용하기/" data-id="cjqmi5c9h0005ypzuksh07nzt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AmazonMQ/">AmazonMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
