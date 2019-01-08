@@ -5,15 +5,15 @@
   
 
   
-  <title>VueJS 에서 Typescript로 개발하기 | programmer jeonghunKim8</title>
+  <title>VueJS 에서 Typescript로 개발하기 1 | programmer jeonghunKim8</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="사전 준비Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다. vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다. 기존에는 프로젝트 생성 후 수동으로">
+  <meta name="description" content="Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. Why Typescript?왜 Typescript를 사용하느냐? 는 질문은, Typescript의 장점에 대해 구글링 해보면 많이 나오니, 두줄 정도로만 작성하겠습니다.  자동완성을 통한 생산성 향상 컴파일 레벨에서의 타입오류 검출로 인한 생산성 향상  물론, Typescript를 사용">
 <meta name="keywords" content="VueJS,TypeScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VueJS 에서 Typescript로 개발하기">
+<meta property="og:title" content="VueJS 에서 Typescript로 개발하기 1">
 <meta property="og:url" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/index.html">
 <meta property="og:site_name" content="programmer jeonghunKim8">
-<meta property="og:description" content="사전 준비Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다. vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다. 기존에는 프로젝트 생성 후 수동으로">
+<meta property="og:description" content="Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. Why Typescript?왜 Typescript를 사용하느냐? 는 질문은, Typescript의 장점에 대해 구글링 해보면 많이 나오니, 두줄 정도로만 작성하겠습니다.  자동완성을 통한 생산성 향상 컴파일 레벨에서의 타입오류 검출로 인한 생산성 향상  물론, Typescript를 사용">
 <meta property="og:locale" content="Korean">
 <meta property="og:image" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/1.png">
 <meta property="og:image" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/2.png">
@@ -22,10 +22,10 @@
 <meta property="og:image" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/5.png">
 <meta property="og:image" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/6.png">
 <meta property="og:image" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/7.png">
-<meta property="og:updated_time" content="2019-01-07T15:49:40.776Z">
+<meta property="og:updated_time" content="2019-01-08T16:00:02.825Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VueJS 에서 Typescript로 개발하기">
-<meta name="twitter:description" content="사전 준비Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다. vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다. 기존에는 프로젝트 생성 후 수동으로">
+<meta name="twitter:title" content="VueJS 에서 Typescript로 개발하기 1">
+<meta name="twitter:description" content="Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다. Why Typescript?왜 Typescript를 사용하느냐? 는 질문은, Typescript의 장점에 대해 구글링 해보면 많이 나오니, 두줄 정도로만 작성하겠습니다.  자동완성을 통한 생산성 향상 컴파일 레벨에서의 타입오류 검출로 인한 생산성 향상  물론, Typescript를 사용">
 <meta name="twitter:image" content="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/1.png">
   
     <link rel="alternate" href="/atom.xml" title="programmer jeonghunKim8" type="application/atom+xml">
@@ -87,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      VueJS 에서 Typescript로 개발하기
+      VueJS 에서 Typescript로 개발하기 1
     </h1>
   
 
@@ -95,8 +95,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="사전-준비"><a href="#사전-준비" class="headerlink" title="사전 준비"></a>사전 준비</h2><p>Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다.</p>
-<p>pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다.</p>
+        <p>Typescript로 VueJS 프로젝트를 사용하는 방법을 알아봅니다.</p>
+<h2 id="Why-Typescript"><a href="#Why-Typescript" class="headerlink" title="Why Typescript?"></a>Why Typescript?</h2><p>왜 Typescript를 사용하느냐? 는 질문은, Typescript의 장점에 대해 구글링 해보면 많이 나오니, 두줄 정도로만 작성하겠습니다.</p>
+<ul>
+<li>자동완성을 통한 생산성 향상</li>
+<li>컴파일 레벨에서의 타입오류 검출로 인한 생산성 향상</li>
+</ul>
+<p>물론, Typescript를 사용하면, 문법이 좀 더 장황해져서 타이핑이 늘어난다는 단점이 있겠으나, 위의 장점들이 이를 상쇄한다고 생각합니다.<br>Typescript를 사용하는 이유에 대해서는 훌륭한 글들이 많으니 참고하시면 좋을 것 같습니다.</p>
+<ul>
+<li><a href="https://hyunseob.github.io/2018/08/12/do-you-need-to-use-ts/" target="_blank" rel="noopener">타입스크립트, 써야할까?</a></li>
+<li><a href="https://medium.com/@constell99/%EC%9A%B0%EB%A6%AC%EA%B0%80-typescript%EB%A5%BC-%EC%84%A0%ED%83%9D%ED%95%9C-%EC%9D%B4%EC%9C%A0-b0a423654f1e" target="_blank" rel="noopener">우리가 Typescript를 선택한 이유</a></li>
+</ul>
+<h2 id="사전-준비"><a href="#사전-준비" class="headerlink" title="사전 준비"></a>사전 준비</h2><p>pc 또는 mac에 nodejs와 npm이 설치 되어 있다는 전제 하에 진행합니다.</p>
 <p>vue-cli 2 버전대에서는 Typescript를 지원하지 않았지만, 3버전대로 업그레이드 되면서, Typescript를 공식적으로 지원하기 시작했습니다.</p>
 <p>기존에는 프로젝트 생성 후 수동으로 Typescript에 맞게 꾸며야만 했으나, vue cli 3 버전부터는 프로젝트 생성 시 옵션을 통하여 Typescript를 선택할 수 있어 많이 편해졌습니다.</p>
 <p>터미널 (또는 CMD)창을 열어 아래 명령어를 입력하여 vue-cli를 설치 해 줍니다.</p>
@@ -140,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqmienc80000k2zur7abglxv" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqnyfm3w0000l8zujfgc829w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -150,6 +160,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/11/09/vue-typescript-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          VueJS 에서 Typescript로 개발하기 2
+        
+      </div>
+    </a>
   
   
     <a href="/2018/10/09/AmazonMQ-사용하기/" id="article-nav-older" class="article-nav-link-wrap">
@@ -183,7 +202,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/AmazonMQ/" style="font-size: 10px;">AmazonMQ</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/VueJS/" style="font-size: 10px;">VueJS</a>
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/AmazonMQ/" style="font-size: 10px;">AmazonMQ</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/tags/VueJS/" style="font-size: 20px;">VueJS</a>
     </div>
   </div>
 
@@ -192,7 +211,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
     </div>
   </div>
 
@@ -205,7 +224,11 @@
       <ul>
         
           <li>
-            <a href="/2018/10/26/vue-typescript-1/">VueJS 에서 Typescript로 개발하기</a>
+            <a href="/2019/11/09/vue-typescript-2/">VueJS 에서 Typescript로 개발하기 2</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/26/vue-typescript-1/">VueJS 에서 Typescript로 개발하기 1</a>
           </li>
         
           <li>
