@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>VueJS 에서 Typescript로 개발하기 3 | programmer jeonghunKim8</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="vue-property-decorator 에 대해 알아봅시다.vue-property-decorator 는 vuejs 에서 typescript로 개발할 때, 클래스 컴포넌트 스타일로 개발하기 쉽게 도와주는 데코레이터 들입니다. 제공해 주는 데코레이터들로는  @Emit @Inject @Model @Prop @Provide @Watch @Component  가">
+<meta name="keywords" content="VueJS,TypeScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VueJS 에서 Typescript로 개발하기 3">
+<meta property="og:url" content="https://jeonghunkim8.github.io/2018/11/23/vue-typescript-3/index.html">
+<meta property="og:site_name" content="programmer jeonghunKim8">
+<meta property="og:description" content="vue-property-decorator 에 대해 알아봅시다.vue-property-decorator 는 vuejs 에서 typescript로 개발할 때, 클래스 컴포넌트 스타일로 개발하기 쉽게 도와주는 데코레이터 들입니다. 제공해 주는 데코레이터들로는  @Emit @Inject @Model @Prop @Provide @Watch @Component  가">
+<meta property="og:locale" content="Korean">
+<meta property="og:image" content="https://jeonghunkim8.github.io/2018/11/23/vue-typescript-3/1.png">
+<meta property="og:updated_time" content="2019-01-13T07:39:24.113Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VueJS 에서 Typescript로 개발하기 3">
+<meta name="twitter:description" content="vue-property-decorator 에 대해 알아봅시다.vue-property-decorator 는 vuejs 에서 typescript로 개발할 때, 클래스 컴포넌트 스타일로 개발하기 쉽게 도와주는 데코레이터 들입니다. 제공해 주는 데코레이터들로는  @Emit @Inject @Model @Prop @Provide @Watch @Component  가">
+<meta name="twitter:image" content="https://jeonghunkim8.github.io/2018/11/23/vue-typescript-3/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="programmer jeonghunKim8" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">programmer jeonghunKim8</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://jeonghunkim8.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue-typescript-3" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/23/vue-typescript-3/" class="article-date">
+  <time datetime="2018-11-23T11:23:49.000Z" itemprop="datePublished">2018-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      VueJS 에서 Typescript로 개발하기 3
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="vue-property-decorator-에-대해-알아봅시다"><a href="#vue-property-decorator-에-대해-알아봅시다" class="headerlink" title="vue-property-decorator 에 대해 알아봅시다."></a>vue-property-decorator 에 대해 알아봅시다.</h2><p><a href="https://github.com/kaorun343/vue-property-decorator#readme" target="_blank" rel="noopener">vue-property-decorator</a> 는 vuejs 에서 typescript로 개발할 때, 클래스 컴포넌트 스타일로 개발하기 쉽게 도와주는 데코레이터 들입니다. 제공해 주는 데코레이터들로는</p>
+<ul>
+<li>@Emit</li>
+<li>@Inject</li>
+<li>@Model</li>
+<li>@Prop</li>
+<li>@Provide</li>
+<li>@Watch</li>
+<li>@Component</li>
+</ul>
+<p>가 있습니다. 이 중 @Component 데코레이터와 @Prop 데코레이터는 지난 포스팅에서 살펴 봤습니다.</p>
+<p>그럼 우리가 Vue와 typescript를 사용하면서 제일 많이 사용하게 될 @Prop 데코레이터부터 살펴보도록 하겠습니다.</p>
+<h3 id="Prop"><a href="#Prop" class="headerlink" title="@Prop()"></a>@Prop()</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Prop(options: (PropOptions | Constructor[] | Constructor) = &#123;&#125;) decorator</span><br></pre></td></tr></table></figure>
+<p>출처: <a href="https://github.com/kaorun343/vue-property-decorator" target="_blank" rel="noopener">https://github.com/kaorun343/vue-property-decorator</a></p>
+<p>위와 같은 형식으로 사용하며,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Vue, Component, Prop &#125; from &apos;vue-property-decorator&apos;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">export default class YourComponent extends Vue &#123;</span><br><span class="line">  @Prop(Number) propA!: number</span><br><span class="line">  @Prop(&#123; default: &apos;default value&apos; &#125;) propB!: string</span><br><span class="line">  @Prop([String, Boolean]) propC!: string | boolean</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이렇게 만들어진 코드는 아래 코드와 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    propA: &#123;</span><br><span class="line">      type: Number</span><br><span class="line">    &#125;,</span><br><span class="line">    propB: &#123;</span><br><span class="line">      default: &apos;default value&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    propC: &#123;</span><br><span class="line">      type: [String, Boolean]</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>default 옵션을 통해 기본값을 지정할 수도 있습니다.</p>
+<h3 id="Emit"><a href="#Emit" class="headerlink" title="@Emit()"></a>@Emit()</h3><p>Emit 데코레이터는 자식 -&gt; 부모 컴포넌트로 이벤트 바인딩을 할때 주로 사용합니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Emit(event?: string)</span><br></pre></td></tr></table></figure></p>
+<p>형식으로 선언되며, Emit 하고자 하는 event 명을 string 형식으로 넣어 선언하면 됩니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Emit(&apos;change&apos;)</span><br><span class="line">private onChange(value: string) &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>과 같이 선언하며, ‘change’와같이 emit되는 이벤트 명을 넣지 않을 경우, 함수 명을 이벤트 명으로 사용하게 됩니다. (단, 이벤트명을 넣지 않아 자동으로 이벤트 emit이 선언된 경우에는 카멜 케이스의 함수명이 케밥 케이스의 함수명으로 변경되어 적용됩니다. 예: onChange -&gt; on-change)</p>
+<p>우리가 생성했던 test-project에 Emit을 사용한 코드를 넣어 봅시다.</p>
+<p>Home.vue파일의 내용을 아래와 같이 바꿉니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;home&quot;&gt;</span><br><span class="line">    &lt;img alt=&quot;Vue logo&quot; src=&quot;../assets/logo.png&quot;&gt;</span><br><span class="line">    &lt;HelloWorld </span><br><span class="line">      msg=&quot;Welcome to Your Vue.js + TypeScript App&quot;</span><br><span class="line">      @onClick=&quot;clickEventHandler&quot;</span><br><span class="line">      /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Vue &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line">import HelloWorld from &apos;@/components/HelloWorld.vue&apos;; // @ is an alias to /src</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    HelloWorld,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">export default class Home extends Vue &#123;</span><br><span class="line"></span><br><span class="line">  private clickEventHandler() &#123;</span><br><span class="line">    console.log(&apos;click!&apos;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>HelloWorld에  <code>onClick</code> 이라는 이름으로 clickEventHandler 함수를 바인딩 했습니다.<br>그리고 클래스에 clickEventHandler() 라는 함수를 정의 했습니다. 해당 함수가 실행 되면 콘솔 창에 <code>click!</code>이라는 메세지를 출력합니다.</p>
+<p>HelloWorld.vue 파일을 열어 내용을 아래와 같이 바꿉니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;button @click=&quot;onClick&quot; &gt;클릭!&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Prop, Vue, Emit &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">export default class HelloWorld extends Vue &#123;</span><br><span class="line">  @Prop() private msg!: string;</span><br><span class="line"></span><br><span class="line">  @Emit(&apos;onClick&apos;)</span><br><span class="line">  private onClick() &#123;</span><br><span class="line">    //</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>.hello 클래스를 가진 div에 클릭을 할 경우 onClick함수를 실행시키는 버튼을 추가 했습니다.<br>그리고 onClick() 함수 앞에 Emit(‘onClick’) 이라고 Emit 데코레이터를 선언 했습니다. 이제 이 onClick() 함수가 실행되면 부모 클래스로 onClick 이벤트를 Emit 합니다.</p>
+<p>이 Emit 데코레이터는 @Model 데코레이터와 함께 많이 사용되며, 이벤트 바인딩을 할때 필수기 때문에 잘 봐두어야 합니다.</p>
+<p>만약, event emitting과 함께 데이터를 전달하고 싶다면??</p>
+<p>Home.vue와 HelloWorld.vue 클래스를 아래와 같이 바꿔봅시다.</p>
+<p>Home.vue:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;home&quot;&gt;</span><br><span class="line">    &lt;img alt=&quot;Vue logo&quot; src=&quot;../assets/logo.png&quot;&gt;</span><br><span class="line">    &lt;HelloWorld </span><br><span class="line">      msg=&quot;Welcome to Your Vue.js + TypeScript App&quot;</span><br><span class="line">      @onClick=&quot;clickEventHandler&quot;</span><br><span class="line">      /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Vue &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line">import HelloWorld from &apos;@/components/HelloWorld.vue&apos;; // @ is an alias to /src</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    HelloWorld,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">export default class Home extends Vue &#123;</span><br><span class="line"></span><br><span class="line">  private clickEventHandler(message: string) &#123;</span><br><span class="line">    console.log(message);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>HelloWorld.vue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;button @click=&quot;(event) =&gt; onClick(&apos;클릭이벤트가 발생했했습니다.&apos;)&quot; &gt;클릭!&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Prop, Vue, Emit &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">export default class HelloWorld extends Vue &#123;</span><br><span class="line">  @Prop() private msg!: string;</span><br><span class="line"></span><br><span class="line">  @Emit(&apos;onClick&apos;)</span><br><span class="line">  private onClick(message: string) &#123;</span><br><span class="line">    //</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>선언하는 함수의 args를 전달하고 싶은 데이터 형식으로 넣어 전달하면 됩니다.</p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="@Model()"></a>@Model()</h3><p>Model 데코레이터는 @Prop 데코레이터 다음으로 많이 쓰이게 될 데코레이터가 아닌가 합니다. Prop은 일반적으로 단방향 바인딩인데 반해, Model은 양방향 바인딩을 제공합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Model(event?: string, options: (PropOptions | Constructor[] | Constructor) = &#123;&#125;) decorator</span><br></pre></td></tr></table></figure>
+<p>선언방법은 위와 같습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Vue, Component, Model &#125; from &apos;vue-property-decorator&apos;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">export default class YourComponent extends Vue &#123;</span><br><span class="line">  @Model(&apos;change&apos;, &#123; type: Boolean &#125;) checked!: boolean</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위 코드는 아래와 같은 코드와 동일한 코드입니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  model: &#123;</span><br><span class="line">    prop: &apos;checked&apos;,</span><br><span class="line">    event: &apos;change&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    checked: &#123;</span><br><span class="line">      type: Boolean</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>이제 우리의 test project에 코드를 만들어봅시다.</p>
+<p>Home.vue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;home&quot;&gt;</span><br><span class="line">    &#123;&#123;count&#125;&#125;</span><br><span class="line">    &lt;HelloWorld v-model=&quot;count&quot;/&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Vue, Watch &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line">import HelloWorld from &apos;@/components/HelloWorld.vue&apos;; // @ is an alias to /src</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    HelloWorld,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">export default class Home extends Vue &#123;</span><br><span class="line"></span><br><span class="line">  private count: number = 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>count 변수를 새로 넣었고, 이를 화면에 출력하도록 했습니다.<br>그리고 HelloWorld 컴포넌트에는 count 변수를 v-model로 양방향 바인딩을 했습니다.</p>
+<p>HelloWorld.vue<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">    &lt;button @click=&quot;(event) =&gt; onChange(count+1)&quot; &gt;add&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Prop, Vue, Emit, Model &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">export default class HelloWorld extends Vue &#123;</span><br><span class="line"></span><br><span class="line">  @Model(&apos;change&apos;, &#123;type: Number&#125;)</span><br><span class="line">  private count!: number;</span><br><span class="line"></span><br><span class="line">  @Emit(&apos;change&apos;)</span><br><span class="line">  private onChange(count: number) &#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>HelloWorld 컴포넌트의 다른 내용은 지우고 버튼 하나만 남겨뒀습니다.<br>count 변수를 model로 받도록 @Model 데코레이터와 함께 선언했고, 버튼을 눌렀을 경우 받은 count에 +1을 해서 change event를 emit 하도록 선언 했습니다.</p>
+<p>이제 컴파일 하고 버튼을 클릭 하면, Home.vue 컴포넌트에서 count값이 1씩 올라가는 것을 확인할 수 있습니다.</p>
+<h3 id="Watch"><a href="#Watch" class="headerlink" title="@Watch"></a>@Watch</h3><p>@Watch 데코레이터는 값이 변경되는지를 감시하고 있다가, 변경 됐을 때 같이 선언한 함수를 실행시켜주는 데코레이터 입니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Watch(&apos;count&apos;)</span><br><span class="line">onCountChanged(val: number, oldVal: number) &#123;</span><br><span class="line">  //함수 내용</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>우리의 Home.vue에 count가 변경될 때 log를 찍어주는 내용을 추가해 봅시다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Watch(&apos;count&apos;)</span><br><span class="line">private onChangeCount(val: number, oldVal: number) &#123;</span><br><span class="line">  console.log(`$&#123;oldVal&#125; -&gt; $&#123;val&#125;`);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>를 Home.vue에 추가해 주고 확인해 봅니다.</p>
+<img src="/2018/11/23/vue-typescript-3/1.png" title="사진1">
+<p>클릭할때마다 count 의 값이 변경되고, 이를 감지해 onChangeCount가 실행되는 것을 확인 할 수 있습니다.</p>
+<h3 id="이-외-데코레이터-Inject-Provide"><a href="#이-외-데코레이터-Inject-Provide" class="headerlink" title="이 외 데코레이터(@Inject / @Provide)"></a>이 외 데코레이터(@Inject / @Provide)</h3><p>Inject와 Provide는 서비스 주입 형태 사용시 사용되게 되는데, 개인적인 의견으로는 vuex 패턴으로 프로젝트를 디자인 하게 될 경우, 사용빈도가 낮아지게 되어 별도로 설명하지는 않겠습니다.</p>
+<p>(<em>vue 공식 페이지에서도 provide와 inject는 주로 고급 플러그인/컴포넌트 라이브러리를 위해 제공되고, 일반 애플리케이션 코드에서는 사용하지 않는 것이 좋다고 설명되어 있습니다.</em>)</p>
+<p><a href="https://kr.vuejs.org/v2/api/index.html#provide-inject" target="_blank" rel="noopener">자세한 설명</a></p>
+<p>다음 포스트에서는 vuex를 typescript 클래스 형태로 사용하는 법에 대해서 작성하도록 하겠습니다.</p>
+<p>감사합니다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jeonghunkim8.github.io/2018/11/23/vue-typescript-3/" data-id="cjqul9vou000b42zuyh6dpw3z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/09/vue-typescript-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          VueJS 에서 Typescript로 개발하기 2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/26/vue-typescript-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VueJS 에서 Typescript로 개발하기 1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AmazonMQ/">AmazonMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/AmazonMQ/" style="font-size: 10px;">AmazonMQ</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/tags/VueJS/" style="font-size: 20px;">VueJS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/09/vue-typescript-2/">VueJS 에서 Typescript로 개발하기 2</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/23/vue-typescript-3/">VueJS 에서 Typescript로 개발하기 3</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/26/vue-typescript-1/">VueJS 에서 Typescript로 개발하기 1</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/09/AmazonMQ-사용하기/">AmazonMQ 사용하기</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 jeonghun.Kim<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
