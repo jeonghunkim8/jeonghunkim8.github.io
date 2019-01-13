@@ -108,11 +108,18 @@
 <p>그 바로 아랫줄엔 HelloWorld 컴포넌트를 import 하는 구문이 들어가 있습니다. vue 파일을 import 할 때, ‘@/component/‘ 형식으로 절대경로 참조가 가능합니다. 혹은 ‘../components/HelloWorld.vue’와 같은 형식으로 상대경로 참조도 가능합니다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">  components: &#123;</span><br><span class="line">    HelloWorld,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">export default class Home extends Vue &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>그리고 그 아래엔 @Component 데코레이터 안에, 이 컴포넌트에서 사용하는 다른 컴포넌트들을 components: 라는 값으로 나열해 줍니다.<br>이렇게 components 항목에 HelloWorld 컴포넌트를 추가해 주었기 때문에, 상단 템플릿 영역에서 &lt;HelloWorld&gt;와 같이 컴포넌트를 사용할 수 있게 됩니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;HelloWorld msg=&quot;Welcome to Your Vue.js + TypeScript App&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>그렇다면 우리가 msg property로 넘긴 <code>Welcom to Your Vue.js ~~~</code> 는 어떻게 HelloWorld 컴포넌트에서 불러올 수 있게 될까요?</p>
+<p>/src/components/HelloWorld.vue 파일을 열어 봅시다.</p>
+<img src="/2019/11/09/vue-typescript-2/4.png" title="사진4">
+<p>line: 12 를 보면 msg라고 선언한 변수 앞에 @Prop() 이라는 데코레이터를 볼 수 있습니다. 바로 Prop이라는 데코레이터와 함께 변수를 선언 하면, 해당 변수 명의 prop을 바인딩 해서 받아올 수 있습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;HelloWorld&apos;, &#123;</span><br><span class="line">  // props 정의</span><br><span class="line">  props: [&apos;msg&apos;],</span><br><span class="line">  template: &apos;&lt;div class=&quot;hello&quot;&gt;&lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;&lt;/div&gt;&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>ES6 스타일에서는 위와 같은 코드라고 볼 수 있습니다.</p>
+<p>다음 포스팅에서는 vue-property-decorator 에서 제공하는 데코레이터에 대해 좀 더 자세히 다뤄보도록 하겠습니다.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2019/11/09/vue-typescript-2/" data-id="cjqnyfm420001l8zuks9d5r10" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2019/11/09/vue-typescript-2/" data-id="cjquijm7t0001q5zuiz3xujir" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -201,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqnyfm3w0000l8zujfgc829w" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjquijm7p0000q5zutjlvh5tw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -299,7 +306,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/09/AmazonMQ-사용하기/" data-id="cjqnyfm53000al8zux0aj1blj" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/09/AmazonMQ-사용하기/" data-id="cjquijm9z000aq5zuzqnfha8o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AmazonMQ/">AmazonMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
