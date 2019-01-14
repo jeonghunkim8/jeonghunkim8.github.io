@@ -62,6 +62,70 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-vue-typescript-4" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/07/vue-typescript-4/" class="article-date">
+  <time datetime="2018-12-07T11:19:31.000Z" itemprop="datePublished">2018-12-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/07/vue-typescript-4/">VueJS 에서 Typescript로 개발하기 4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h2><p>VueJS를 사용하면서 상태를 관리하는 대표적인 방법은 <a href="https://vuex.vuejs.org/kr/" target="_blank" rel="noopener">Vuex</a>를 사용하는 방법이 있습니다.(Vue에서 공식적으로 추천하는 상태관리 라이브러리 이기도 합니다.) 이번 포스트에서는 Vuex를 Typescript 적인 방법으로 사용하는 방법에 대해서 작성하도록 하겠습니다.</p>
+<p>Vuex에 대한 사전 지식은 <a href="https://vuex.vuejs.org/kr/" target="_blank" rel="noopener">공식사이트</a>에 자세히 설명이 되어 있습니다. (한글로 말이죠..)<br>그러나 이곳에 나와있는 방법으로는 Typescript와는 무엇인가 입맛에 잘 맞지 않습니다.</p>
+<p>우리는 vuex를 클래스 형태로 만들어서 사용하기로 합시다.</p>
+<p>vue-cli를 통해 프로젝트를 생성 하면서 vuex를 선택하게 되면 src/store.ts 라는 파일에 store 가 정의가 됩니다.</p>
+<img src="/2018/12/07/vue-typescript-4/1.png" title="사진1">
+<p>우리는 이 store.ts 파일을 지우고, stores 폴더를 만들어 store를 각각 namesapce 별로 모듈화 하여 분리하고, 각각의 스토어 모듈은 클래스 형태로 정의해서 쓰도록 합시다.</p>
+<p>이를 위해 우리는 <a href="https://github.com/championswimmer/vuex-module-decorators" target="_blank" rel="noopener">vuex-module-decorators</a> 와 <a href="https://github.com/ktsn/vuex-class" target="_blank" rel="noopener">vuex-class</a> 라는 라이브러리를 사용합니다.</p>
+<p>터미널에서 yarn add 명령어를 통해 라이브러리를 추가해 줍니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add vuex-module-decorators</span><br><span class="line">yarn add vuex-class</span><br></pre></td></tr></table></figure>
+<p>src 폴더 하단에 stores 폴더를 만들고, index.ts 파일을 새로 생성합니다.</p>
+<p>그리고 기존 store.ts파일을 import 하고 있던 main.ts 파일을 열어 아래와 같이 바꿉니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">import App from &apos;./App.vue&apos;;</span><br><span class="line">import router from &apos;./router&apos;;</span><br><span class="line">import store from &apos;./stores&apos;; //이부분.&apos;./store&apos; -&gt; &apos;./stores&apos;</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = false;</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: (h) =&gt; h(App),</span><br><span class="line">&#125;).$mount(&apos;#app&apos;);</span><br></pre></td></tr></table></figure>
+<p>그리고 /src/stores/index.ts 파일을 열어 아래와 같이 내용을 넣습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">import Vuex from &apos;vuex&apos;;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>기본적인 틀은 셋팅이 끝났습니다. 우리는 이제 원하는대로 클래스 스타일 스토어 모듈을 작성하고 modules 밑에 넣어주기만 하면 됩니다.</p>
+<h2 id="Store-모듈-생성"><a href="#Store-모듈-생성" class="headerlink" title="Store 모듈 생성"></a>Store 모듈 생성</h2><p>/src/stores/CountStore.ts 파일을 만들고 아래 내용을 넣습니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Module, VuexModule, Mutation, Action &#125; from &apos;vuex-module-decorators&apos;;</span><br><span class="line"></span><br><span class="line">@Module(&#123;namespaced: true&#125;)</span><br><span class="line">export default class CountStore extends VuexModule &#123;</span><br><span class="line"></span><br><span class="line">  // states</span><br><span class="line">  public count: number = 0;</span><br><span class="line"></span><br><span class="line">  // getters</span><br><span class="line">  get doubledCount() &#123;</span><br><span class="line">    return this.count * 2;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // mutations</span><br><span class="line">  @Mutation</span><br><span class="line">  public increment(delta: number) &#123;</span><br><span class="line">    console.log(`increment mutation: $&#123;delta&#125;`);</span><br><span class="line">    this.count += delta;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // actions</span><br><span class="line">  @Action(&#123; commit: &apos;increment&apos; &#125;)</span><br><span class="line">  public incr(delta: number) &#123;</span><br><span class="line">    console.log(`increment action: $&#123;delta&#125;`);</span><br><span class="line">    return delta;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>state, getter, mutation, action 들은 위와 같은 형식으로 적용하여 사용합니다. 컴포넌트에서 incr 액션함수를 호출하면, 함수가 return 하는 delta라는 값으로 increment mutation을 commit 하게 됩니다. 설명이 약간 어설픈데요, 결국 위에 선언한 incr 이라는 이름의 Action 은 아래 코드와 동일합니다. (namespace를 사용하지 않으려면 @Module 데코레이터의 내용을 빼고 작성합니다.)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  incr: (context: any, delta: number) =&gt; &#123;</span><br><span class="line">    context.commit(&apos;increment&apos;, delta);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>/src/stores/index.ts 파일을 열어 방금 만든 CountStore 모듈을 추가하는 구문을 넣어줍니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">import Vuex from &apos;vuex&apos;;</span><br><span class="line">import CountStore from &apos;./CountStore&apos;;</span><br><span class="line"></span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    CountStore,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>이제 우리는 CountStore 라는 StoreModule을 완성했습니다.<br>이제는 우리가 원하는 컴포넌트에서 CountStore를 연결하여 사용할 차례입니다.</p>
+<p>Home.vue 파일을 열어 아래와 같이 바꿔줍니다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;home&quot;&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;count&#125;&#125; * 2 = &#123;&#123;doubledCount&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;button @click=&quot;incr(1)&quot;&gt;incr&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Vue, Watch &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line">import &#123; namespace, State, Action, Getter &#125; from &apos;vuex-class&apos;;</span><br><span class="line"></span><br><span class="line">const CountStoreModule = namespace(&apos;CountStore&apos;);</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">export default class Home extends Vue &#123;</span><br><span class="line"></span><br><span class="line">  @CountStoreModule.State(&apos;count&apos;)</span><br><span class="line">  private count!: number;</span><br><span class="line"></span><br><span class="line">  @CountStoreModule.Getter(&apos;doubledCount&apos;)</span><br><span class="line">  private doubledCount!: number;</span><br><span class="line"></span><br><span class="line">  @CountStoreModule.Action(&apos;incr&apos;)</span><br><span class="line">  private incr!: (delta: number) =&gt; void;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>CountStoreModule을 namespace를 통해 연결하고, state와 getter를 통해 상태값을 가져와 화면에 바인딩 합니다. 그리고 버튼을 incr 액션 생성함수와 연결 해줍니다.</p>
+<img src="/2018/12/07/vue-typescript-4/2.png" title="사진2">
+<p>잘 작동하는 것을 확인할 수 있습니다.</p>
+<p>이 외에 async를 활용한 @MutationAction도 있습니다. 이에 대한 상세한 설명은<br><a href="https://github.com/championswimmer/vuex-module-decorators" target="_blank" rel="noopener">vuex-module-decorators</a> github 페이지를 참조하시기 바랍니다.</p>
+<p>부족한 글 읽어주셔서 감사합니다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jeonghunkim8.github.io/2018/12/07/vue-typescript-4/" data-id="cjqwk95rn0003bfzu59cvnkz3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-vue-typescript-3" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/23/vue-typescript-3/" class="article-date">
@@ -144,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/11/23/vue-typescript-3/" data-id="cjquleu66000b1nzu0y6m4k4q" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/11/23/vue-typescript-3/" data-id="cjqwk95ux000obfzuzt1cvsw2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -213,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/11/09/vue-typescript-2/" data-id="cjquleu5800011nzuewjiyzk2" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/11/09/vue-typescript-2/" data-id="cjqwk95ri0001bfzu6gorlz2p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -302,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjquleu5400001nzuuyu1ioaj" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqwk95rc0000bfzuwlhi8ts2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -400,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/09/AmazonMQ-사용하기/" data-id="cjquleu65000a1nzuhdlkve88" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/09/AmazonMQ-사용하기/" data-id="cjqwk95u7000fbfzur0i8njdj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AmazonMQ/">AmazonMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
@@ -444,7 +508,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
     </div>
   </div>
 
@@ -455,6 +519,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/12/07/vue-typescript-4/">VueJS 에서 Typescript로 개발하기 4</a>
+          </li>
         
           <li>
             <a href="/2018/11/23/vue-typescript-3/">VueJS 에서 Typescript로 개발하기 3</a>
