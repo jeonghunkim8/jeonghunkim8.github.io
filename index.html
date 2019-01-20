@@ -62,6 +62,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-vue-typescript-5" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/21/vue-typescript-5/" class="article-date">
+  <time datetime="2018-12-21T13:17:59.000Z" itemprop="datePublished">2018-12-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/21/vue-typescript-5/">VueJS 에서 Typescript로 개발하기 5</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="VueJS에서-Typescript로-개발하기"><a href="#VueJS에서-Typescript로-개발하기" class="headerlink" title="VueJS에서 Typescript로 개발하기"></a>VueJS에서 Typescript로 개발하기</h2><p>이번에는 좀 다른 이야기를 해볼까 합니다.<br>VueJS 프로젝트를 vue-cli를 사용해 Typescript를 사용하도록 생성하면 기본으로 들어가 있는 vue-property-decorator 를 사용하면 VueJS를 Typescript와 클래스 형태로 사용하기 좋지만, 그대로 사용하게 되면 코드들이 완전히 클래스 형태로 사용한다는 느낌은 좀 덜 받게 됩니다.</p>
+<p>아래 코드를 봅시다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;home&quot;&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;count&#125;&#125; * 2 = &#123;&#123;doubledCount | answer&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;button @click=&quot;incr(1)&quot;&gt;incr&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Vue, Watch &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line">import &#123; mapState, mapActions &#125; from &apos;vuex&apos;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  computed: &#123;</span><br><span class="line">    ...mapState(&apos;CountStore&apos;, &#123;</span><br><span class="line">      count: &apos;count&apos;,</span><br><span class="line">    &#125;),</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapActions(&apos;CountStore&apos;, &#123;</span><br><span class="line">      incr: &apos;incr&apos;,</span><br><span class="line">    &#125;),</span><br><span class="line">  &#125;,</span><br><span class="line">  filters: &#123;</span><br><span class="line">    answer: (n: number) =&gt; `$&#123;n&#125; 입니다!`,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">export default class Home extends Vue &#123;</span><br><span class="line"></span><br><span class="line">  private count!: number;</span><br><span class="line"></span><br><span class="line">  private incr!: (delta: number) =&gt; void;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>물론, 지난 포스트에 올렸던 코드는 vuex-class의 도움을 받아 vuex와 컴포넌트를 연결할 때 사용하는 조금은 장황한 mapState, mapActions 대신 데코레이터로 코드를 바꿀 수 있었습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;home&quot;&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;count&#125;&#125; * 2 = &#123;&#123;doubledCount&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;button @click=&quot;incr(1)&quot;&gt;incr&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Vue, Watch &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line">import &#123; namespace, State, Action, Getter &#125; from &apos;vuex-class&apos;;</span><br><span class="line"></span><br><span class="line">const CountStoreModule = namespace(&apos;CountStore&apos;);</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  filters: &#123;</span><br><span class="line">    answer: (n: number) =&gt; `$&#123;n&#125; 입니다!`,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">export default class Home extends Vue &#123;</span><br><span class="line"></span><br><span class="line">  @CountStoreModule.State(&apos;count&apos;)</span><br><span class="line">  private count!: number;</span><br><span class="line"></span><br><span class="line">  @CountStoreModule.Getter(&apos;doubledCount&apos;)</span><br><span class="line">  private doubledCount!: number;</span><br><span class="line"></span><br><span class="line">  @CountStoreModule.Action(&apos;incr&apos;)</span><br><span class="line">  private incr!: (delta: number) =&gt; void;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>그러나 여전히 마음에 안드는 부분이 있습니다. filters 부분인데요 얘네들도 결국엔 function 들인데 클래스 안쪽에서 정의할 수는 없을까? 하는 생각이 들었습니다.<br>(Filter에 대한 설명은 <a href="https://kr.vuejs.org/v2/guide/filters.html" target="_blank" rel="noopener">vue공식페이지</a>에서 참조하시기 바랍니다.)</p>
+<p>물론 이를 해결해주는 라이브러리가 당연히 있습니다.<br><a href="https://www.npmjs.com/package/vue-ts-decorate" target="_blank" rel="noopener">vue-ts-decorate</a>라는 녀석인데요, 사용하려고 고려해 보았으나, last publish가 2년 전입니다. 시시각각 변하는 frontend 생태계에서 마지막 업데이트가 2년전이라면 죽은 프로젝트라고 보아도 될 것 같다는 판단이네요.<br>그리고 또 한가지 마음에 들지 않는 점은, Filter뿐만 아니라 기존에 vue-property-decorator 가 제공하는 데코레이터들(Prop, Watch 등)도 중복해서 지원하고, 이를 적용하기 위해선 기존 코드들도 vue-ts-decorate를 적용하도록 변경해야 하는 것 처럼 보였습니다.</p>
+<p>vue-ts-decorate 말고는 @Filter 데코레이터를 지원하는 라이브러리는 없는것 처럼 보입니다. (혹시 알고계신 분 있으시면 제보좀 부탁드립니다.)</p>
+<p>그래서 더이상 검색은 포기하고, 직접 만들기로 합니다.</p>
+<p>/src 폴더에 utils 폴더라는 폴더를 만들고, Decorators.ts 라는 이름의 파일을 생성 합니다.</p>
+<p>그리고 아래 내용을 붙여넣습니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line"></span><br><span class="line">type VueClass&lt;V&gt; = (new (...args: any[]) =&gt; V &amp; Vue) &amp; typeof Vue;</span><br><span class="line"></span><br><span class="line">export function Filter(): any &#123;</span><br><span class="line">  return (target: Vue, propertyKey: string, descriptor: PropertyDescriptor): any =&gt; &#123;</span><br><span class="line">    const Ctor = target.constructor as VueClass&lt;Vue&gt;;</span><br><span class="line">    Ctor.filter(propertyKey, descriptor.value);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>별로 길지 않은 간단한 코드지만, 이 코드를 추가하면 이제 @Filter 데코레이터를 통해 필터를 정의할 수 있게 됩니다.</p>
+<p>자, 이제 Filter 데코레이터를 정의 했으니, 기존 코드를 수정해 @Component 데코레이터 안에 (클래스 밖에) 정의되어 있던 Filters를 클래스 내부로 옮겨봅시다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;home&quot;&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;count&#125;&#125; * 2 = &#123;&#123;doubledCount | answer&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;button @click=&quot;incr(1)&quot;&gt;incr&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; Component, Vue, Watch &#125; from &apos;vue-property-decorator&apos;;</span><br><span class="line">import &#123; namespace, State, Action, Getter &#125; from &apos;vuex-class&apos;;</span><br><span class="line">import &#123; Filter &#125; from &apos;@/utils/Decorators&apos;;</span><br><span class="line"></span><br><span class="line">const CountStoreModule = namespace(&apos;CountStore&apos;);</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">export default class Home extends Vue &#123;</span><br><span class="line"></span><br><span class="line">  @CountStoreModule.State(&apos;count&apos;)</span><br><span class="line">  private count!: number;</span><br><span class="line"></span><br><span class="line">  @CountStoreModule.Getter(&apos;doubledCount&apos;)</span><br><span class="line">  private doubledCount!: number;</span><br><span class="line"></span><br><span class="line">  @CountStoreModule.Action(&apos;incr&apos;)</span><br><span class="line">  private incr!: (delta: number) =&gt; void;</span><br><span class="line"></span><br><span class="line">  @Filter()</span><br><span class="line">  private answer(n: number) &#123;</span><br><span class="line">    return `$&#123;n&#125; 입니다!`;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>새로 정의한 Filter 데코레이터를 import 해주고, <code>import { Filter } from &#39;@/utils/Decorators&#39;;</code> 클래스 내부에 @Filter() 데코레이터와 함께 필터의 내용을 작성해 줍니다. (여기서 주의할 점은 필터는 순수함수로만 만들어져야 합니다. this 키워드를 통해 함수 외부의 변수는 사용할 수 없습니다.)</p>
+<img src="/2018/12/21/vue-typescript-5/1.png" title="사진1">
+<p>filter가 잘 작동하는 것을 확인할 수 있습니다.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jeonghunkim8.github.io/2018/12/21/vue-typescript-5/" data-id="cjr4kahic0004zjzu8dkwphna" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-vue-typescript-4" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/12/07/vue-typescript-4/" class="article-date">
@@ -114,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/12/07/vue-typescript-4/" data-id="cjqwk95rn0003bfzu59cvnkz3" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/12/07/vue-typescript-4/" data-id="cjr4kahia0003zjzu72s4yknd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -208,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/11/23/vue-typescript-3/" data-id="cjqwk95ux000obfzuzt1cvsw2" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/11/23/vue-typescript-3/" data-id="cjr4kahjy000kzjzul8pdx7x6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -277,7 +333,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/11/09/vue-typescript-2/" data-id="cjqwk95ri0001bfzu6gorlz2p" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/11/09/vue-typescript-2/" data-id="cjr4kahi70001zjzu7hhoyysh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -366,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjqwk95rc0000bfzuwlhi8ts2" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/26/vue-typescript-1/" data-id="cjr4kahi10000zjzuhh54lxjr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VueJS/">VueJS</a></li></ul>
@@ -464,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jeonghunkim8.github.io/2018/10/09/AmazonMQ-사용하기/" data-id="cjqwk95u7000fbfzur0i8njdj" class="article-share-link">Share</a>
+      <a data-url="https://jeonghunkim8.github.io/2018/10/09/AmazonMQ-사용하기/" data-id="cjr4kahjw000jzjzul0g0a0wi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AmazonMQ/">AmazonMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
@@ -521,6 +577,10 @@
       <ul>
         
           <li>
+            <a href="/2018/12/21/vue-typescript-5/">VueJS 에서 Typescript로 개발하기 5</a>
+          </li>
+        
+          <li>
             <a href="/2018/12/07/vue-typescript-4/">VueJS 에서 Typescript로 개발하기 4</a>
           </li>
         
@@ -534,10 +594,6 @@
         
           <li>
             <a href="/2018/10/26/vue-typescript-1/">VueJS 에서 Typescript로 개발하기 1</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/09/AmazonMQ-사용하기/">AmazonMQ 사용하기</a>
           </li>
         
       </ul>
